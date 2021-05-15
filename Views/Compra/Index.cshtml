@@ -1,0 +1,33 @@
+ 
+<h1>Compras</h1>
+<hr>
+<div class="d-flex"><a asp-action="Comprar" asp-controller="Compra" class="btn btn-success">Agregar</a></div>
+<table class="table table-light">
+    <thead class="thead-light">
+        <tr>
+            <th>#Factura</th>
+            <th>Proveedor</th>
+            <th>Fecha</th>
+            <th>Total</th>
+            <th>Total IVA</th>
+            <th>Ver detalles</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var c in (List<Compra>)ViewBag.Compras)
+        {
+            <tr>
+                <td>@c.NumeroFactura</td>
+                <td>@c.IdProveedorNavigation.Nombre</td>
+                <td>@c.Fecha</td>
+                <td>@Math.Round(@c.DetalleCompras.Select( x => (x.Cantidad* x.Precio)).DefaultIfEmpty(0).Sum(),2)</td>
+                <td>@Math.Round(@c.DetalleCompras.Select(x=>((x.Cantidad*x.Precio)*x.Iva)).Sum(),2)</td>
+ 
+                <td>
+                    <a class="btn btn-warning text-white-50 " style="cursor: pointer; border-radius: 16px;" asp-action="Editar" asp-controller="Compra" asp-route-id="@c.IdCompra">Editar</a>
+                </td>
+               
+            </tr>
+        }
+    </tbody>
+</table>

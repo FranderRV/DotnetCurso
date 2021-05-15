@@ -1,0 +1,14 @@
+@model Categoria
+@{
+    bool bandera = Model.IdCategoria==0?true:false;
+} 
+<form asp-action="Registrar" asp-controller="Categoria" method="post">
+    <input type="hidden" asp-for="IdCategoria">
+    
+    <div class="form-group">
+        <label for="Categoria">Categoria</label>
+        <input id="Categoria" class="form-control" type="text" asp-for="Nombre">
+        <button  class='btn @(bandera?"btn-primary":"btn-warning") text-white'>@(bandera?"Registrar":"Actualizar")</button>
+    </div>
+
+</form>

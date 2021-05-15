@@ -1,0 +1,34 @@
+<h1>Productos</h1>
+<hr>
+<a asp-action="ViewRegistro" asp-controller="Producto" class="btn btn-success">Agregar</a>
+<table class="table table-light">
+    <thead class="thead-light">
+        <tr>
+            <th>Nombre</th>
+            <th>Descripcion</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>IdCategoria</th>
+            <th colspan="2"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in ViewBag.lista)
+        {
+            <tr>
+                <td>@p.Nombre</td>
+                <td>@p.Descripcion</td>
+                <td>@p.Marca</td>
+                <td>@p.Modelo</td>
+                <td>@p.IdCategoriaNavigation.Nombre</td>
+                <td>
+                <td><a asp-action="Eliminar" asp-controller="Producto" asp-route-id="@p.IdProducto"
+                    class="btn btn-danger">Eliminar</a></td>
+                <td><a asp-action="ViewEditar" asp-controller="Producto" asp-route-id="@p.IdProducto"
+                    class="btn btn-warning text-white">Editar</a></td>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,33 @@
+<h1>Clientes</h1>
+<hr>
+<div class="d-flex"><a asp-action="ViewRegistrar" asp-controller="Proveedor" class="btn btn-success">Agregar</a></div>
+<table class="table table-light">
+    <thead class="thead-light">
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Cédula</th>
+            <th>NIT</th>
+            <th>Correo</th>
+            <th colspan="2"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in ViewBag.lista)
+        {
+            <tr>
+                <td>@p.IdProveedor</td>
+                <td>@p.Nombre</td>
+                <td>@p.Dui</td>
+                <td>@p.Nit</td>
+                <td>@p.Correo</td>
+                <td>
+                    <a asp-action="Editar" asp-controller="Proveedor" asp-route-id="@p.IdProveedor">Editar</a>
+                </td>
+                <td>
+                    <a asp-action="Eliminar" asp-controller="Proveedor" asp-route-id="@p.IdProveedor">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

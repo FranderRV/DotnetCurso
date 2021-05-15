@@ -1,0 +1,30 @@
+@model Producto
+@{
+    bool bandera = Model.IdProducto == 0 ? true : false;
+}
+<form asp-action='@(bandera?"Registro":"Editar")' asp-controller="Producto" method="POST">
+    <input type="hidden" asp-for="IdProducto">
+    <div class="form-group">
+        <label for="Nombre">Nombre</label>
+        <input id="Nombre" asp-for="Nombre" class="form-control" type="text">
+    </div>
+    <div class="form-group">
+        <label for="Descripcion">Descripcion</label>
+        <textarea id="Descripcion" asp-for="Descripcion" class="form-control" type="text"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="Marca">Marca</label>
+        <input id="Marca" asp-for="Marca" class="form-control" type="text">
+    </div>
+    <div class="form-group">
+        <label for="Modelo">Modelo</label>
+        <input id="Modelo" asp-for="Modelo" class="form-control" type="text">
+    </div>
+    <div class="form-group">
+        <label for="Categoria">Categoria</label>
+        <select id="Categoria" asp-for="IdCategoria" class="form-control"
+            asp-items='@(new SelectList(ViewBag.Categorias,"IdCategoria","Nombre"))'></select>
+    </div>
+
+    <button  class='btn @(bandera?"btn-primary":"btn-warning") text-white'>@(bandera?"Registrar":"Actualizar")</button>
+</form>

@@ -1,0 +1,92 @@
+@model Tuple<Compra,DetalleCompra>
+@{
+    bool caso = Model.Item1.IdCompra==0?true:false; 
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="display-5">Gestión de compras</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <form action="" id="formEncabezado" method="post">
+                <input type="hidden" asp-for="Item1.IdCompra" id="IdCompra">
+                <div class="row">
+                    <div class="form-group col-sm-4">
+                        <label for="NumeroFactura">N° Factura</label>
+                        <input id="NumeroFactura" asp-for="Item1.NumeroFactura" class="form-control" type="text">
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <label for="Proveedor">Proveedor</label>
+                        <select id="Proveedor" asp-for="Item1.IdProveedor" class="form-control"
+                            asp-items='@(new SelectList(ViewBag.Proveedores,"IdProveedor","Nombre"))'></select>
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <label for="Fecha">Fecha</label>
+                        <input id="Fecha" asp-for="Item1.Fecha" value='@DateTime.Now.ToString("dd/MM/yyyy")'
+                            class="form-control" type="date">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+
+            <form id="formDetalle" action="" method="post">
+
+                <input type="hidden" asp-for="Item2.IdCompra" id="IdCompra">
+                <div class="row">
+                    <div class="form-group col-sm-12">
+                        <label for="IdProducto">Productos</label>
+                        <select id="IdProducto" asp-for="Item2.IdProducto" class="form-control"
+                            asp-items='@(new SelectList(ViewBag.Productos,"IdProducto","Nombre"))'></select>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <label for="Cantidad">Cantidad</label>
+                        <input id="Cantidad" asp-for="Item2.Cantidad" class="form-control" type="number">
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <label for="Precio">Precio</label>
+                        <input id="Precio" asp-for="Item2.Precio" class="form-control" type="number">
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <label for="Iva">IVA</label>
+                        <input id="Iva" asp-for="Item2.Iva" class="form-control" type="text" value="0,13">
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between">
+
+                    <button type="submit" class="btn btn-primary">Agregar</button>
+                    <button type="button" id="actualizarDetalle" class="btn btn-warning text-white ">Actualizar</button>
+                </div>
+            </form>
+
+        </div>
+
+
+        <div class="col-sm-6">
+            <table class="table table-light">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>Iva</th>
+                        <th>Total</th>
+                        <th scope="2">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="body">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 d-flex justify-content-end mt-4">
+            <a asp-action="Comprar" asp-controller="Compra" class="btn btn-info  mr-2">Nuevo</a>
+            <button id='JSON' class="btn btn-success">@(caso?"Registrar":"Actualizar")</button>
+        </div>
+    </div>

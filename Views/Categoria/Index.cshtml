@@ -1,0 +1,24 @@
+<h1>Categorías</h1>
+<hr>
+<a class="btn btn-success" asp-action="ViewRegistro" asp-controller="Categoria">Agregar</a>
+<table class="table table-light">
+    <thead class="thead-light">
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th colspan="2"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var c in ViewBag.lista)
+        {
+            
+        <tr>
+            <td>@c.IdCategoria</td>
+            <td>@c.Nombre</td>
+            <td><a asp-action="Eliminar" asp-controller="Categoria" asp-route-id="@c.IdCategoria" class="btn btn-danger">Eliminar</a></td>
+            <td><a asp-action="Editar" asp-controller="Categoria" asp-route-id="@c.IdCategoria" class="btn btn-warning text-white">Editar</a></td>
+        </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,26 @@
+@model  Proveedore
+@{
+    bool bandera = Model.IdProveedor==0?true:false;
+}
+<form method="post" asp-action="Registrar" asp-controller="Proveedor">
+    <input type="hidden" asp-for="IdProveedor">
+    <div class="form-group">
+        <label for="Nombre">Nombre</label>
+        <input asp-for="Nombre" class="form-control"  type="text">
+    </div>
+    <div class="form-group">
+        <label for="cedula">Cédula</label>
+        <input asp-for="Dui"  class="form-control" type="text">
+    </div>
+    <div class="form-group">
+        <label for="carne">Carné</label>
+        <input asp-for="Nit" class="form-control" type="text">
+    </div>
+    <div class="form-group">
+        <label for="corre">Correo</label>
+        <input asp-for="Correo"  class="form-control" type="email">
+    </div>
+    <div class="d-flex">
+        <button class='btn @(bandera?"btn-primary":"btn-warning") text-white'>@(bandera?"Guardar":"Actualizar")</button>
+    </div>
+</form>
